@@ -1,0 +1,320 @@
+                        ['mousemove', 'touchmove', 'touchstart'].forEach(function (eventType) {
+                            document.getElementById('timeline1').addEventListener(
+                                eventType,
+                                function (e) {
+                                    var chart,
+                                        point,
+                                        i,
+                                        event;
+                                    for (i = 0; i < Highcharts.charts.length; i = i + 1) {
+                                        chart = Highcharts.charts[i];
+                                        if (chart==null || chart.renderTo==null){
+                                            continue;
+                                        }
+                                        // Find coordinates within the chart
+                                        event = chart.pointer.normalize(e);
+                                        // Get the hovered point
+                                        point = chart.series[0].searchPoint(event, true);
+                                        if (point) {
+                                            if (chart.renderTo.id == "timeline1"){
+                                                var data = missionImpossible[point.id];
+                                                geomap1.setTitle({'text':timeline_dict[point.x][0]+' (Original Released Box Office)'});
+                                                if (data == null){
+                                                    geomap1.setSubtitle({'text':"No Box Office Information"});
+                                                    geomap1.series[0].update({'data':[]});
+                                                }
+                                                else if (data.length==0){
+                                                    geomap1.setSubtitle({'text':'The Movie Is Not Released'})
+                                                    geomap1.series[0].update({'data':[]});
+                            
+                                                }
+                                                else{
+                                                    price = getTotalBoxOffice(data);
+                                                    geomap1.series[0].update({'data':data});
+                                                    geomap1.setSubtitle({'text':"Total Original Released Box Office Across the World: $"+price});
+                                                }
+                                                point.highlight(e);
+    
+                                            }
+                                            
+                                        }
+    
+                                    }
+                                }
+                            );
+                        });
+                        Highcharts.Pointer.prototype.reset = function () {
+                            return undefined;
+                        };
+    
+                        Highcharts.Point.prototype.highlight = function (event) {
+                            event = this.series.chart.pointer.normalize(event);
+                            this.onMouseOver(); // Show the hover marker
+                            this.series.chart.tooltip.refresh(this); // Show the tooltip
+                        };
+    
+                        function syncExtremes(e) {
+                            var thisChart = this.chart;
+    
+                            if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
+                                Highcharts.each(Highcharts.charts, function (chart) {
+                                    if (chart !== thisChart) {
+                                        if (chart.xAxis[0].setExtremes) { // It is null while updating
+                                            chart.xAxis[0].setExtremes(
+                                                e.min,
+                                                e.max,
+                                                undefined,
+                                                false,
+                                                { trigger: 'syncExtremes' }
+                                            );
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                        function getTotalBoxOffice(dataset){
+                            totalvalue = 0;
+                            for (i = 0;i<dataset.length;i++){
+                                totalvalue+=dataset[i]['value'];
+                            }
+                            return totalvalue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            
+                        }
+                        var timeline1 = {
+                            chart: {
+                            zoomType: 'x',
+                            type: 'timeline'
+                            },
+                            xAxis: {
+                            type: 'datetime',
+                            visible: false,
+                            labels: {
+                                format: '{value:%Y-%b-%e}'
+                            },
+                            },
+                            yAxis: {
+                            gridLineWidth: 1,
+                            title: null,
+                            labels: {
+                                enabled: false
+                            }
+                            },
+                            legend: {
+                            enabled: false
+                            },
+                            credits:{
+                                enabled: false,
+                            },
+                            title: {
+                            text: "Timeline of Tom Cruise's movies"
+                            },
+                            subtitle: {
+                                text: 'Year of the Movies that Tom Cruise Acted In'
+                            },
+                            tooltip: {
+                            style: {
+                                width: 300
+                            },
+                            formatter: function(){
+                                    var movies = timeline_dict[this.x];
+                                    var color = this.color;
+                                    var date = Highcharts.dateFormat('%b %e, %Y',this.x);
+                                    return '<span style="color:'+color+'">'+date+'<br/><span style="color:'+color+'">● </span><span style="font-weight: bold;" ></span>'+movies[0]+'<br/>';
+                                },
+                            },
+                            series: [{
+                            dataLabels: {
+                                allowOverlap: false,
+                                formatter: function(){
+                                    if (this.point.label.includes('Mission')){
+                                        var date = Highcharts.dateFormat('%Y',this.x);
+                                        return '<span style="color:'+this.point.color+'">● </span><span style="font-weight: bold;" > ' +
+                                            date+'</span><br/>'+this.point.label;
+                                    }
+                                }
+                            },
+                            marker: {
+                                symbol: 'circle'
+                            },
+                            data: [],
+                            }]
+                        }
+    
+                        var dataset = {};
+                        var timeline_dict = {};
+                        var missionImpossible = {};
+    
+                        Highcharts.ajax({
+                            url:'assets/final_data.json',
+                            dataType:'text',
+                            success: function(activity){
+                                activity = JSON.parse(activity);
+                                dataset = activity[0];
+                                timeline_data = [];
+                                movie_ids = Object.keys(dataset);
+                                for (i =0;i<movie_ids.length;i++){
+                                    current_movie = dataset[movie_ids[i]];
+                                    year = current_movie['year'];
+                                    var a = year.split(/[^0-9]/);
+                                    date = new Date (a[0],a[1]-1,a[2]);
+                                    if (year==null){
+                                        continue;
+                                    }
+                                    if (timeline_dict.hasOwnProperty(date)==false){
+                                        timeline_dict[date] = [];
+                                    }
+                                    movie_dict = {};
+                                    title = current_movie['title'];
+                                    if (timeline_dict[date].includes(title)==false){
+                                        timeline_dict[date].push(title);
+                                    }
+                                    movie_dict['x'] = date;
+                                    movie_dict['name'] = title;
+                                    movie_dict['label'] = title;
+                                    movie_dict['id'] = movie_ids[i];
+                                    timeline_data.unshift(movie_dict);
+                                }
+                                timeline1.series[0].data = timeline_data;
+                                Highcharts.chart('timeline1',timeline1);
+                                MI_orig = activity[1];
+                                MI_movie_id = Object.keys(MI_orig);
+                                for (i = 0;i<MI_movie_id.length;i++){
+                                    box_office = MI_orig[MI_movie_id[i]];
+                                    movie_countries = Object.keys(box_office);
+                                    countries = [];
+                                    for (j = 0;j<movie_countries.length;j++){
+                                        movie = {};
+                                        movie['name'] = movie_countries[j];
+                                        movie['value'] = parseInt(box_office[movie_countries[j]]);
+                                        countries.push(movie);
+                                    }
+                                    missionImpossible[MI_movie_id[i]] = countries;
+                                }
+    
+                                radarData = activity[2];
+                                Highcharts.chart('radar', {
+    
+                                    chart: {
+                                    parallelCoordinates: true,
+                                    polar: true,
+                                    type:'line',
+                                    },
+                                    title:{
+                                        text:"Comparison between Mission Impossible and Other Tom Cruise's Movies"
+                                    },
+                                    subtitle:{
+                                        text:"Difference Between Rating, Number of Ratings, Number of Movies, Movie Time, Number of Movie Stars, and Box Offices"
+                                    },
+                                    xAxis: {
+                                    categories: ['Avg. rating', 'Avg. rating_count', 'num_movies', 'Avg. runtime', 'Avg. num_stars', 'Avg. box_office'],
+                                    tickmarkPlacement: 'on',
+                                    lineWidth: 0
+                                    },
+                                    credits:{
+                                        enabled: false
+                                    },
+                                    legend: {
+                                    enabled: true
+                                    },
+                                    tooltip: {
+                                        shared: true,
+                                    },
+                                    yAxis: [{
+                                    min: 0,
+                                    max: 10,
+                                    showLastLabel: true,         
+                                    lineWidth: 0,
+                                    gridLineInterpolation: 'polygon',
+                                    }, {
+                                    min: 0,
+                                    max: 350000,
+                                    showLastLabel: true,         
+                                    lineWidth: 0,              
+                                    gridLineInterpolation: 'polygon',
+    
+                                    }, {
+                                    min: 0,
+                                    max: 45,
+                                    showLastLabel: true,          
+                                    lineWidth: 0,             
+                                    gridLineInterpolation: 'polygon',
+                                    }, {
+                                        min: 0,
+                                        max: 145,
+                                        showLastLabel: true,          
+                                        lineWidth: 0,             
+                                        gridLineInterpolation: 'polygon',
+                                    }, {
+                                        min: 0,
+                                        max: 10,
+                                        showLastLabel: true,            
+                                        lineWidth: 0,           
+                                        gridLineInterpolation: 'polygon',
+                                    }, {
+                                        min: 0,
+                                        max: 600000000,
+                                        showLastLabel: true,           
+                                        lineWidth: 0,            
+                                        gridLineInterpolation: 'polygon',
+                                    }],
+                                    series: radarData,
+                                    responsive: {
+                                        rules: [{
+                                            condition: {
+                                                maxWidth: 500
+                                            },
+                                            chartOptions: {
+                                                legend: {
+                                                    align: 'center',
+                                                    verticalAlign: 'bottom'
+                                                },
+                                                pane: {
+                                                    size: '70%'
+                                                }
+                                            }
+                                        }]
+                                    }
+                                });}
+    
+                            
+                        });
+                        geomap1 = new Highcharts.mapChart('geomap1', {
+                            chart: {
+                            map: 'custom/world',
+                            },
+                            title: {
+                                text: 'Box Office of Original Release Across the World',
+                                useHTML: true,
+                            },
+                            mapNavigation: {
+                            enabled: true,
+                            buttonOptions: {
+                                verticalAlign: 'bottom'
+                            }
+                            },
+                            subtitle:{
+                                text: "",
+                                useHTML : true,
+                            },
+                            credits:{
+                                enabled: false,
+                            },
+                            colorAxis:{
+                                endOnTick: true,
+                                minColor: '#66CABE',
+                                maxColor: '#3C33FF',
+                                type: 'logarithmic',
+                            },
+                            series: [{
+                            data: [],
+                            joinBy: ['name', 'name'],
+                            name: 'Box Office',
+                            states: {
+                                hover: {
+                                color: '#a4edba'
+                                }
+                            }
+                            }]
+                        });
+    
+    
