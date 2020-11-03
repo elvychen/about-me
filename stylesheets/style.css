@@ -69,55 +69,6 @@ a{
 button {
     background-color: #F2F2F2;
 }
-#arrowP{
-    cursor: pointer;
-    height:20px;
-    width:20px; 
-    border: none;
-    transform: rotate(90deg);
-}
-#arrowP2{
-    cursor: pointer;
-    height:20px;
-    width:20px; 
-    border: none;
-    transform: rotate(180deg);
-}
-#Final-Project{
-    margin: auto;
-    color: black;
-    font-size: 14px;
-    text-align:left;
-    font-family: 'Times New Roman';
-    padding: 10px;
-    display: none;
-    background-color: #F2F2F2;
-    border: 1pt solid #616A6B;
-}
-#conclusion_text{
-    visibility: hidden;
-    display: none;
-}
-
-#currentTable{
-    visibility: visible;
-    display: block;
-    table-layout: fixed;
-    width:100%; 
-    padding:0px; 
-    margin:0; 
-}
-
-#Sychronized{
-    margin: auto;
-    color: black;
-    font-size: 16px;
-    text-align:left;
-    font-family: 'Times New Roman';
-    padding: 10px;
-    background-color: #F2F2F2;
-    border: 1pt solid #616A6B;
-}
 
 #myCarousel{
     color: #616A6B;
@@ -152,7 +103,7 @@ ul.data-viz{
     list-style-position: inside;
 }
 
-ul.otherP{
+#otherP{
     text-align: left;
     list-style-position: inside;
     font-size: 16px;
