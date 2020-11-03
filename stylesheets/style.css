@@ -129,13 +129,6 @@ button {
     height: 600px; 
     width:100%;
 } 
-
-#cg3{
-    color: #616A6B;
-    background-color: rgb(240,247,249,0.6);
-    font-size: 26px;
-}
-
 .carousel-control-next,
 .carousel-control-prev {
     filter: invert(100%);
@@ -152,4 +145,22 @@ ul.social li {
     width:100%;
     display: flex;
     flex-direction: row;
+}
+
+ul.data-viz{
+    text-align: center;
+    list-style-position: inside;
+}
+
+ul.otherP{
+    text-align: left;
+    list-style-position: inside;
+    font-size: 16px;
+}
+#sep {
+    color: #616a6b;
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 10px;
+    text-align: center;
+    display: inline-block;
 }

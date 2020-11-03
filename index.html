@@ -10,77 +10,11 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <script src='http://use.edgefonts.net/de-walpergens-pica.js'></script>
-        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-        <script src="https://code.highcharts.com/maps/modules/data.js"></script>
-        <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
-        <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/data.js"></script>
-        <script src="https://code.highcharts.com/modules/timeline.js"></script>
-        <script src="https://code.highcharts.com/highcharts-more.js"></script>
-        <script src="https://code.highcharts.com/modules/parallel-coordinates.js"></script>
-        <script>
-            function ShowFP(){
-                var chart = document.getElementById("Final-Project");
-                var other = document.getElementById("Sychronized");
-                var arrow = document.getElementById("arrowP");
-                var otherA = document.getElementById("arrowP2");
-                var button = document.getElementById("proj");
-                var otherB = document.getElementById("hw");
-                if (chart.style.display === "block"){
-                    chart.style.display = "none";
-                    arrow.style.transform = "rotate(90deg)";
-                    button.style.color = "#616A6B";
-                    
-                }
-                else{
-                    chart.style.display = "block";
-                    other.style.display = "none";
-                    otherA.style.transform = "rotate(90deg)";
-                    arrow.style.transform = "rotate(180deg)";
-                    button.style.color = "#4897D6";
-                    otherB.style.color = "#616A6B";
-                }
-            }
-            function ShowSC(){
-                var chart = document.getElementById("Sychronized");
-                var arrow = document.getElementById("arrowP2");
-                var other = document.getElementById("Final-Project");
-                var otherA = document.getElementById("arrowP");
-                var button = document.getElementById("hw");
-                var otherB = document.getElementById("proj");
-                if (chart.style.display === "none"){
-                    chart.style.display = "block";
-                    other.style.display = "none";
-                    otherA.style.transform = "rotate(90deg)";
-                    arrow.style.transform = "rotate(180deg)";
-                    button.style.color = "#4897D6";
-                    otherB.style.color = "#616A6B";
-                }
-                else{
-                    button.style.color = "#616A6B";
-                    chart.style.display = "none";
-                    arrow.style.transform = "rotate(90deg)";
- 
-                }
-            }
-            function changeConclusion(){
-                var x = document.getElementById('conclusion_text');
-                if (x.style.visibility=='visible'){
-                    x.style.visibility = 'hidden';
-                    x.style.display = "none";
-                }
-                else{
-                    x.style.visibility = 'visible';
-                    x.style.display = 'block';
-                }
-            }
-        </script>
+        <script src='http://use.edgefonts.net/de-walpergens-pica.js'></script> 
 	</head>
 	<body> 
 		<nav class="navbar navbar-expand-md navbar-light" id="navigation">
-            <a class="navbar-brand" href="#home">Yu-Chieh Chen</a>
+            <a class="navbar-brand" href="#home">Yu-Chieh Elvy Chen</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -88,11 +22,17 @@
             <div class="collapse navbar-collapse" id="top">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#DSC106">Data_Visualization</a>
+                        <a class="nav-link" href="#dataviz">Data_Viz</a>                        
                     </li> 
+                    <li>
+                        <i class="far fa-heart" id = "sep"></i>
+                    </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="#project">Project</a>
-                        </li>
+                        <a class="nav-link" href="#project">Project</a>
+                    </li>
+                    <li>
+                        <i class="far fa-heart" id = "sep"></i>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact Me</a>
                     </li>
@@ -102,15 +42,15 @@
 
         <div class="container-fluid" id = "home">
             <h2 class="title">About me</h2>
-            <h3 style="font-weight: bolder; font-size:30px;">Yu-Chieh Chen</h3>
+            <h3 style="font-weight: bolder; font-size:30px;">Yu-Chieh Elvy Chen</h3>
             <img src = "assets/elvy.png" id ="me" alt="elvy">
             <p> I am a third-year <span>Data Science</span> major student <br>minoring in <span>Economics</span> and <span>Cognitive Science</span>  
-            <a href ="https://ucsd.edu">@University of California San Diego</a>.<br>I anticipate to graduate in March 2021.</p>
+            <a href ="https://ucsd.edu" target="_blank">@University of California San Diego</a>.<br>I anticipate to graduate in June 2021.</p>
             <ul>
                 <li style="display: inline;">• active learner</li>  
                 <li style="display: inline;">• critical thinker •</li>
             </ul>
-            <a href="assets/Yu-Chieh Chen Resume.pdf"><i class="fas fa-link"></i> Resume</a>
+            <a href="assets/Yu-Chieh Chen Resume.pdf" target="_blank"><i class="fas fa-link"></i> Resume</a><br>
             <div class="row">
                 <div class="col-sm-4">
                     <p>I am proficient in <br> Java, Python, HTML/CSS, SQL, JavaScript, R, Spark, and Tableau</p>
@@ -121,9 +61,9 @@
                     <img src="assets/language.jpg" style="width:80%" alt="Image">
                 </div>
                 <div class="col-sm-4">
-                    <p>I am a DSC30 tutor and former intern  
-                        <a href="https://www.iis.sinica.edu.tw/">@Institute of Information Science</a> 
-                        and <a href = "https://www.linkedin.com/company/deloitte/">@Deloitte</a>.</p>
+                    <p>I am a data science tutor and former intern  
+                        <a href="https://www.iis.sinica.edu.tw/" target="_blank">@Institute of Information Science</a> 
+                        and <a href = "https://www.linkedin.com/company/deloitte/" target="_blank">@Deloitte</a>.</p>
                     <img src="assets/intern.png" style="width:45%" alt="Image">
                 </div>
             </div>
@@ -133,105 +73,19 @@
         <a href = #navigation><i class="far fa-arrow-alt-circle-up"></i> Back to Top</a>
         <br>
         <br>
-        <div class="container-fluid" id = "DSC106">
+        <div class="container-fluid" id = "dataviz">
             <h2 class="title">Data Visualization</h2>
-            <p>The following pages are my DSC106 course works in Fall 2019.</p>
-            <p> Click to Show the Work</p>
-            <p> Scroll the timeline to see the changes in the other plots</p>
-            <button id='hw' onclick = "ShowSC()" style = "color:#4897D6;"><i class="fas fa-sort-up" id="arrowP2"></i>Movie Analysis</button>
-            <button id='proj' onclick = "ShowFP()"><i class="fas fa-sort-up" id="arrowP"></i>Suicide Rate Analysis</button>
-            <div class="container-fluid" id = "Final-Project">
-                <div class="header" style="background-color: white;">
-                    <table class="table" style = "height:5%;">
-                        <col span = '1' style = "width:8%;">
-                        <col span = "1" style = "width:92%;">
-                        <tr>
-                            <td rowspan = '2'>
-                                <img src = 'assets/2.jpg' style = "display:inline; width: 100%; height:50%" align = 'left'>
-                            </td>
-                            <td style="background-color: rgb(165,42,42,0.8); font-family:de-walpergens-pica, serif">
-                                <h1 style="font-size:30px; color: black">&nbsp Which Group Has the Highest Suicide Rate among Different Factors? </h1>
-                                <h2 style = 'font-size: 18px;color: black'>
-                                        &nbsp &nbsp Suicide rate analysis (2005 - 2015)  
-                                        <a href = "https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016">(kaggle dataset)</a></h2>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div id = 'timeline' style = 'width:100%; height:25%;'></div>
-                <div id = 'lineChart' style = 'width:100%; height:23%'></div>
-                <div style='width: 100%; height: 26%;' class="container">
-                    <div id = 'geomap' style ='position: relative;width:100%; height:100%;'> </div>
-                    <div id = 'histogram' style = 'position: relative;width:100%;height:100%;'></div>
-                </div>
-                <div id = "conclusion_text" style = "background-color: rgb(165,42,42,0.8);">
-                    <ul style="font-size:24px;font-family:de-walpergens-pica, serif">
-                        <br>
-                        The graphs show that 
-                        <li>Among countries, East Europe, Central Asia, Japan and South Korea have highest suicide rates. </li>
-                        <li>Among ages, 35-54 year-old people tend to have highest suicide rates comparing to other ages. </li>
-                                
-                        However, uncertainty still remains. For example, the data does not contain all the countries. 
-                            Therefore, there might be some countries having higher suicide rates. <br><br>
-                        </ul>     
-                </div>
-                <button onclick="changeConclusion()" style ="background-color: rgb(165,42,42,0.8); color: white;font-family:de-walpergens-pica, serif; font-size: 16px;">Conclusion</button>
-                <script src="script/final.js"></script>
-            </div>
-            <div class="container-fluid" id="Sychronized">
-                <div class="header">
-                    <h1 style="font-size: 30px;">Tom Cruise's Movies Analysis</h1>
-                </div>
-                <div>
-                    <div class="container"> 
-                        <div>
-                            <h3 colspan = "2" style="font-size: 22px;">Tom Cruise's Information</h3>
-                            <div class="row" style="padding:2px">
-                                <div  class="col-sm-6">
-                                    <img src = "assets/tom_cruise.jpg" style="display:block; width:100%;min-width:20%; min-height:80px;height:auto; float: left; padding: 3%;" >
-                                </div>
-                                <div  class="col-sm-6" style="min-width: 15%;">
-                                    <ul style="margin-left: 0; padding-left: 0;">
-                                        <li>Born: July 3, 1962</li>
-                                        <li>Year Active: 1981-present</li>
-                                        <li>Awards: <a href="https://en.wikipedia.org/wiki/List_of_awards_and_nominations_received_by_Tom_Cruise">Full list</a></li>
-                                        <li>Website: <a href= "http://tomcruise.com/"> Official Webiste</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div style="margin-left: 2%;padding-left: 2%;">
-                            <br>
-                            &nbsp&nbsp&nbsp&nbsp&nbspWith a total of 43 released movies that Tom Cruise acted in, 6 of them are from <i>Mission: Impossible</i> Series. <i>Mission: Impossible</i> first 
-                            released in 1996. Then <i>Mission: Impossible II</i> and <i>Mission: Impossible III</i> released after 6 years of each. From the timeline, it shows 
-                            that <i>Mission: Impossible</i> then released other ones within shorter time period (6 years, 6 years, 5 years, 4 years, 2 years, and 1 year). From 
-                            the imdb database, it shows that <i>Mission: Impossible VII</i> and <i>Mission: Impossible VIII</i> are planning to release in 2021 and 2022.
-                        </div>
-                    </div>
-                    
-                    <div id = 'timeline1'></div>
-                    
-                    <!-- Monthly Sales of Total Item-->
-                    <div id = 'geomap1'></div>
-                    <div>
-                        <p>
-                                &nbsp&nbsp&nbsp&nbsp&nbspFrom the world map, it shows that America still has the most box office comparing to other countries across the world. Besides
-                                this, <i>Mission: Impossible</i> series have higher box office comparing to other movies that Tom Cruise acted in. Also, before 1994, the data 
-                                only contains America's box office. 
-                        </p>
-                    </div>
-                    <div id = 'radar'></div>
-                    <div>
-                        <p>
-                            &nbsp&nbsp&nbsp&nbsp&nbspFrom the radar chart, it compares the average rating, average number of rating, number of movies, average length of the movie in minutes, 
-                            average numbers of stars in a movie, and average box office between <i>Mission: Impossible</i> series and other movies that Tom Cruise acted in. From that, it shows 
-                            that the average rating, average length of the movie, and average numbers of stars are about the same. However, <i>Mission: Impossible</i> has more average numbers of 
-                            rating and box office than other Tom Cruise's movies. <i>Mission: Impossible</i> series is one of the most well-known works of Tom Cruise's.
-                        </p>
-                    </div>
-                    <script src='script/movie.js'></script>
-            </div>
+            <ul class="data-viz">
+                <li>
+                    <a href = "https://yuc399.github.io/suicide-analysis/" target="_blank">Suicide Rate: Chronological Analysis</a>
+                </li>
+                <li>
+                    <a href = "https://yuc399.github.io/SpringField-Energy-Analysis/" target="_blank">SpringField: Energy Analysis</a>
+                </li>
+                <li>
+                    <a href = "https://yuc399.github.io/movie-analysis/" target="_blank">Tom Cruise: Movie Analysis</a>
+                </li>
+            </ul>
         </div>
         <br>
         <br>
@@ -242,23 +96,73 @@
             <h2 class="title">Projects</h2>
             <p>The following are the links of my projects.</p>
             <div class = "row">
-                <div class="col-sm-6">
-                        <a href="assets/CNN_Classification.pdf">Convoluted Neural Network on CIFAR-10	</a>
+                <div class="col-sm-4">
+                        <a href="assets/Headline Diagnosis - Manipulation of Content Farm Headlines.pdf" target="_blank">
+                            Headline Diagnosis - Manipulation of Content Farm Headlines</a>
+                        <iframe src="assets/Headline Diagnosis - Manipulation of Content Farm Headlines.pdf" style ="width:80%; height: 350px;"></iframe>
+                </div>
+                <div class="col-sm-4">
+                        <a href="assets/CNN_Classification.pdf" target="_blank">Convoluted Neural Network on CIFAR-10</a>
                         <iframe src="assets/CNN_Classification.pdf" style ="width:80%; height: 350px;"></iframe>
                 </div>
-                <div class="col-sm-6">
-                    <a href="assets/CSE158.pdf">Machine Learning Analysis on Airline Flights Delay Prediction</a>
+                <div class="col-sm-4">
+                    <a href="assets/CSE158.pdf" target="_blank">Machine Learning Analysis on Airline Flights Delay Prediction</a>
                     <iframe src="assets/CSE158.pdf" style ="width:80%; height: 350px;"></iframe>
                 </div>
             </div>
             <div class = "row">
-                <div class="col-sm-6">
-                    <a href="assets/DSC80.pdf">Relationship between Students’ Financial Data and College Completion Rate</a>
+                <div class="col-sm-4">
+                    <a href="assets/DSC80.pdf" target="_blank">Students’ Financial Data and College Completion Rate Analysis</a>
                     <iframe src="assets/DSC80.pdf" style ="width:80%; height: 350px;"></iframe>
                 </div>
-                <div class="col-sm-6">
-                    <a href="assets/cogs108.pdf">Optimal Age Range For Athlete to Success in Olympics Games</a>
+                <div class="col-sm-4">
+                    <a href="assets/cogs108.pdf" target="_blank">Optimal Age Range For Athlete to Success in Olympics Games</a>
                     <iframe src="assets/cogs108.pdf" style ="width:80%; height: 350px;"></iframe>
+                </div>
+                <div class="col-sm-4">
+                        Other Projects
+                        <ul class="otherP">
+                            <li>
+                                Ongoing Project: 
+                                <ul>
+                                    <li>Malware Detection</li>
+                                    <ul>
+                                        <li>tools: python, machine learning, APKTools</li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li>
+                                Past Projects:
+                                <ul>
+                                    <li>
+                                        News Category Prediction
+                                        <ul>
+                                            <li>tools: python, machine learning </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Prediction of Air Quality Based on K-Nearest Neighbor (KNN)
+                                        <ul>
+                                            <li>tools: python, machine learning</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="https://github.com/ElvishElvis/Real-time-Face-Detection-Recognition" target="_blank">
+                                            Face Detection and Recognition</a>
+                                        <ul>
+                                            <li>tools: python, machine learning</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href = "https://github.com/yuc399/fraud-risk-management" target="_blank">Fraud Risk Management Analysis</a>
+                                        <ul>
+                                            <li>tools: Tableau</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                    
+                            </li>
+                        </ul>
                 </div>
             </div>
         </div>
